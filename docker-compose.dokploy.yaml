@@ -1,0 +1,15 @@
+services:
+  sqlite-studio:
+    build:
+      dockerfile: Dockerfile
+    restart: always
+    command: --address=0.0.0.0:3030 sqlite /mounted/${DATABASE_NAME}
+    volumes:
+      - ${DATABASE_PATH}:/mounted
+    networks:
+      dokploy-network:
+        ipv4_address: 10.0.1.100
+
+networks:
+  dokploy-network:
+    external: true
